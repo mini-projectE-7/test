@@ -90,7 +90,7 @@ def sign_in():
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         mytoken = jwt.encode(payload, SECRET_KEY,
-                             algorithm='HS256').decode('utf-8')
+                             algorithm='HS256')
         return jsonify({'result': 'success', 'mytoken': mytoken})
     # 찾지 못하면
     else:
