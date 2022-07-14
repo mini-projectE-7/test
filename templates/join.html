@@ -71,7 +71,7 @@
         }
     </style>
 
-    <title>회원가입</title>
+    <title>우리술 | 회원가입</title>
 
 </head>
 
@@ -218,9 +218,6 @@
         if (inputValue.length < 8) {
             errorBox.innerHTML = "비밀번호는 최소 8자 이상이어야 합니다.";
             return "error";
-        } else if (inputValue == pwCheckInput.value) {
-            errorBox2.innerHTML = "비밀번호가 일치합니다.";
-            errorBox2.style.color = "rgb(0, 185, 13)";
         } else {
             errorBox.innerHTML = "";
         }
@@ -236,13 +233,9 @@
         if (inputValue !== pwInput.value) {
             errorBox.innerHTML = "비밀번호가 일치하지 않습니다.";
             return "error";
-        } else if (pwInput.value > 7) {
-            errorBox.innerHTML = "";
-            return "error";
         } else {
             errorBox.innerHTML = "비밀번호가 일치합니다.";
             errorBox.style.color = "rgb(0, 185, 13)";
-            errorBox2.innerHTML = "";
         }
     }
 

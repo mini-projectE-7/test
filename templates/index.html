@@ -36,6 +36,7 @@
             height: 50px;
             margin: 0;
         }
+
         .signout {
             position: absolute;
             right: 20px;
@@ -46,11 +47,13 @@
             border-radius: 4px;
             text-align: center;
         }
+
         .signout:hover {
             background-color: black;
             color: white;
             transition: .4s;
         }
+
         #post-review {
             position: absolute;
             right: 100px;
@@ -63,11 +66,13 @@
             text-align: center;
             width: 180px;
         }
+
         #post-review:hover {
             background-color: black;
             color: white;
             transition: .4s;
         }
+
         #check-review {
             position: absolute;
             right: 300px;
@@ -80,16 +85,19 @@
             text-align: center;
             width: 180px;
         }
+
         #check-review:hover {
             background-color: black;
             color: white;
             transition: .4s;
         }
+
         .mycards {
-            background-color: #f2e9d8 ;
+            background-color: #f2e9d8;
         }
-         /* FOOTER */
-         footer {
+
+        /* FOOTER */
+        footer {
             background-color: #f2e9d8;
             margin-top: 80px;
         }
@@ -163,10 +171,10 @@
 <body>
     <header>
         <div class="inner">
-            <a href="/">
+            <a href="/home">
                 <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
             </a>
-            <a class="signout" onclick="sign_out()">Log Out</a>
+            <a class="signout" id=outbtn onclick="sign_out()">Log Out</a>
         </div>
     </header>
     <div class="mytitle">
@@ -233,28 +241,28 @@
 
     <footer>
         <div class="inner-footer">
-        <ul class="menu">
-            <li><a href="javascript:void(0)" class="green">Privacy Policy</a></li>
-            <li><a href="javascript:void(0)">Use of Media Consent</a></li>
-            <li><a href="javascript:void(0)">Terms of Use</a></li>
-            <li><a href="javascript:void(0)">GPS Consent</a></li>
-            <li><a href="javascript:void(0)">Cookie Consent</a></li>
-            <li><a href="javascript:void(0)">Cookie Notice</a></li>
-        </ul>
-    
-        <div class="info">
-            <span>사업자등록번호 201-80-21515</span>
-            <span>(주) 항해 E반 7조</span>
-            <span>TEL : 02) 1234-5768 / FAX : 02) 1234-5678</span>
-            <span>개인정보 책임자 : 스파르타</span>
-        </div>
-    
-        <p class="copyright">
-            &copy; <span class="this-year"></span> Sparta Coding Club. All Rights Reserved.</p>>
-        </p>
+            <ul class="menu">
+                <li><a href="javascript:void(0)" class="green">Privacy Policy</a></li>
+                <li><a href="javascript:void(0)">Use of Media Consent</a></li>
+                <li><a href="javascript:void(0)">Terms of Use</a></li>
+                <li><a href="javascript:void(0)">GPS Consent</a></li>
+                <li><a href="javascript:void(0)">Cookie Consent</a></li>
+                <li><a href="javascript:void(0)">Cookie Notice</a></li>
+            </ul>
+
+            <div class="info">
+                <span>사업자등록번호 201-80-21515</span>
+                <span>(주) 항해 E반 7조</span>
+                <span>TEL : 02) 1234-5768 / FAX : 02) 1234-5678</span>
+                <span>개인정보 책임자 : 스파르타</span>
+            </div>
+
+            <p class="copyright">
+                &copy; <span class="this-year"></span> Sparta Coding Club. All Rights Reserved.</p>>
+            </p>
         </div>
     </footer>
-    
+
 
 </body>
 
