@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- menu css file -->
     <link rel="stylesheet" href="../static/main.css" />
+    <!-- js -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script defer src="../static/js/main.js"></script>
     <style>
         * {
             font-family: 'Gowun Dodum', sans-serif;
@@ -33,10 +36,127 @@
             height: 50px;
             margin: 0;
         }
+        .signout {
+            position: absolute;
+            right: 20px;
+            top: 8px;
+            color: black;
+            border: 1px solid black;
+            padding: 4px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .signout:hover {
+            background-color: black;
+            color: white;
+            transition: .4s;
+        }
+        #post-review {
+            position: absolute;
+            right: 100px;
+            top: 230px;
+            color: black;
+            border: 1.5px solid black;
+            font-size: 25px;
+            padding: 4px;
+            border-radius: 4px;
+            text-align: center;
+            width: 180px;
+        }
+        #post-review:hover {
+            background-color: black;
+            color: white;
+            transition: .4s;
+        }
+        #check-review {
+            position: absolute;
+            right: 300px;
+            top: 230px;
+            color: black;
+            border: 1.5px solid black;
+            font-size: 25px;
+            padding: 4px;
+            border-radius: 4px;
+            text-align: center;
+            width: 180px;
+        }
+        #check-review:hover {
+            background-color: black;
+            color: white;
+            transition: .4s;
+        }
+        .mycards {
+            background-color: #f2e9d8 ;
+        }
+         /* FOOTER */
+         footer {
+            background-color: #f2e9d8;
+            margin-top: 80px;
+        }
+
+        footer .menu {
+            display: flex;
+            justify-content: center;
+        }
+
+        footer .menu li {
+            position: relative;
+        }
+
+        footer .menu li::before {
+            content: "";
+            width: 3px;
+            height: 3px;
+            background-color: #555;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -1px;
+            margin: auto;
+        }
+
+        footer .menu li:last-child::before {
+            display: none;
+        }
+
+        footer .menu li a {
+            color: #948f8a;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 15px;
+            display: block;
+            /* to enlarge the size of a tag to click easily for users */
+        }
+
+        footer .menu li a.green {
+            color: black;
+        }
+
+        footer .info {
+            text-align: center;
+        }
+
+        footer .info span {
+            margin-right: 20px;
+            color: #75716d;
+            font-size: 12px;
+        }
+
+        footer .info span:last-child {
+            margin-right: 0;
+        }
+
+        footer .copyright {
+            color: #75716d;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        footer .logo {
+            margin: 30px auto 0;
+        }
     </style>
-    <!-- js -->
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <script defer src="../static/js/main.js"></script>
     <title>우리술 | HOME</title>
 </head>
 
@@ -46,17 +166,17 @@
             <a href="/">
                 <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
             </a>
+            <a class="signout" onclick="sign_out()">Log Out</a>
         </div>
     </header>
     <div class="mytitle">
         <div class="back-color">
             <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
+            <a id="check-review" href="/review">리뷰 확인하기</a>
+            <a id="post-review" href="/post">리뷰 작성하기</a>
         </div>
-        <button id=logbtn onclick="window.location.href='/login'" class="logbtn">로그인</button>
-        <button id=outbtn onclick="sign_out()">로그아웃</button>
     </div>
     <section class="notice">
-        <div class="new">NEW!</div>
         <div class="notice">
             <div class="promotion">
                 <div class="swiper">
@@ -111,6 +231,30 @@
     </div>
 
 
+    <footer>
+        <div class="inner-footer">
+        <ul class="menu">
+            <li><a href="javascript:void(0)" class="green">Privacy Policy</a></li>
+            <li><a href="javascript:void(0)">Use of Media Consent</a></li>
+            <li><a href="javascript:void(0)">Terms of Use</a></li>
+            <li><a href="javascript:void(0)">GPS Consent</a></li>
+            <li><a href="javascript:void(0)">Cookie Consent</a></li>
+            <li><a href="javascript:void(0)">Cookie Notice</a></li>
+        </ul>
+    
+        <div class="info">
+            <span>사업자등록번호 201-80-21515</span>
+            <span>(주) 항해 E반 7조</span>
+            <span>TEL : 02) 1234-5768 / FAX : 02) 1234-5678</span>
+            <span>개인정보 책임자 : 스파르타</span>
+        </div>
+    
+        <p class="copyright">
+            &copy; <span class="this-year"></span> Sparta Coding Club. All Rights Reserved.</p>>
+        </p>
+        </div>
+    </footer>
+    
 
 </body>
 
