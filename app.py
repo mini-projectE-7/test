@@ -24,6 +24,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
+    return render_template('home.html')
+    # token_receive = request.cookies.get('mytoken')
+    # try:
+    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    #     print(payload)
+    #     user_info = db.users.find_one({"userID": payload['id']})
+    #     return render_template('index.html', user_info=user_info)
+    # except jwt.ExpiredSignatureError:
+    #     # return redirect(url_for("main"))
+    #     return render_template('home.html')
+    # except jwt.exceptions.DecodeError:
+    #     # return redirect(url_for("main"))
+    #     return render_template('home.html')
+
+
+@app.route('/home')
+def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -35,11 +52,6 @@ def main():
     except jwt.exceptions.DecodeError:
         # return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
         return redirect(url_for("main"))
-
-
-@app.route('/home')
-def home():
-    return render_template('home.html')
 
 
 @app.route('/post')

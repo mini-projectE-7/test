@@ -1,13 +1,26 @@
-$(document).ready(function () {
-    login_out();
-    randomStation();
+new Swiper('.notice-line .swiper', {
+    direction: 'vertical',
+    autoplay: true,
+    loop: true
 });
 
-function sign_out() {
-    $.removeCookie('mytoken', { path: '/' });
-    alert('로그아웃!');
-    window.location.href = "/"
-}
+new Swiper('.promotion .swiper', {
+    slidesPerView: 4, // how many slides we wanna show at once
+    spaceBetween: 30, // margin between slides
+    centeredSlides: true, // first slide would be centered
+    loop: true,
+    autoplay: {
+    delay: 5000
+    },
+    pagination: {
+    el: '.promotion .swiper-pagination', //
+    clickable: true //user's page numbering control
+    },
+    navigation: {
+    prevEl: '.promotion .swiper-prev',
+    nextEl: '.promotion .swiper-next'
+    }
+});
 
 function randomStation() {
     $('#card').empty();
@@ -49,45 +62,3 @@ function randomStation() {
         }
     })
 }
-
-
-function login_out() {
-    $.ajax({
-        type: "GET",
-        url: "/loginout",
-        data: {},
-        success: function (response) {
-            if (response['result'] == 'success') {
-                $('#logbtn').hide()
-                $('#outbtn').show()
-            } else {
-                $('#logbtn').show()
-                $('#outbtn').hide()
-            }
-        }
-    })
-}
-
-new Swiper('.notice-line .swiper', {
-    direction: 'vertical',
-    autoplay: true,
-    loop: true
-});
-
-new Swiper('.promotion .swiper', {
-    slidesPerView: 4, // how many slides we wanna show at once
-    spaceBetween: 30, // margin between slides
-    centeredSlides: true, // first slide would be centered
-    loop: true,
-    autoplay: {
-    delay: 5000
-    },
-    pagination: {
-    el: '.promotion .swiper-pagination', //
-    clickable: true //user's page numbering control
-    },
-    navigation: {
-    prevEl: '.promotion .swiper-prev',
-    nextEl: '.promotion .swiper-next'
-    }
-});
