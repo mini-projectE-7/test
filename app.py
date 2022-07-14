@@ -135,6 +135,13 @@ def review():
     return render_template("review.html")
 
 
+@app.route("/reviewpage/review", methods=["GET"])
+def review_list_get():
+    review_list = list(db.review.find({}, {'_id': False}))
+    print(review_list)
+    return jsonify({'reviews': review_list})
+
+
 @app.route('/posting', methods=['POST'])
 def posting():
     token_receive = request.cookies.get('mytoken')
