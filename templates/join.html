@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <style>
+        .container {
+            width: auto;
+            max-width: 768px;
+        }
+
+        .content {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .join_content {
+            display: block;
+        }
+
+        .form {
+            overflow: hidden;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form__errorbox {
+            margin: 9px 0 -2px;
+            font-size: 12px;
+            line-height: 14px;
+        }
+    </style>
+
+    <title>회원가입</title>
+
+</head>
+
+<body>
+
+    <div id="container" class="container">
+        <div id="content" class="content">
+            <div class="join_content">
+                <div class="form">
+                    아이디
+                    <input type="text" id="id" placeholder="아이디 입력 (6-20자)" maxlength="20">
+                    <button type="button" id="idCheck" class="button is-primary">중복 확인</button>
+                </div>
+                <div class="form__errorbox" id="idError"></div>
+                <!-- <div class="form">
+                    이메일
+                    <input type="text" id="emailId" placeholder="이메일 ID"> @
+                    <input type="text" id="emailDomain">
+                    <select id="emailSelect" onchange="changeEmail()">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="kakao.com">kakao.com</option>
+                    </select>
+                </div> -->
+                <div class="form__errorbox" id="emailError"></div>
+                <div class="form">
+                    비밀번호
+                    <input type="password" id="pw" placeholder="비밀번호 입력 (8-20자)" maxlength="20">
+                </div>
+                <div class="form__errorbox" id="pwError"></div>
+                <div class="form">
+                    비밀번호 확인
+                    <input type="password" id="pwCheck" placeholder="비밀번호 재입력" maxlength="20">
+                </div>
+                <div class="form__errorbox" id="pwCheckError"></div>
+                <button class="button is-primary" id="signUp" onclick="signUp()">회원가입</button>
+                <button class="button is-primary" onclick="window.location.href='/home'">취소</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const idInput = document.getElementById("id");
+    const idCheckBtn = document.getElementById("idCheck");
+
+    //    const emailIDInput = document.getElementById("emailId");
+    //    const emailDomainInput = document.getElementById("emailDomain");
+    //    const emailSelectChange = document.getElementById("emailSelect")
+
+    const pwInput = document.getElementById("pw");
+    const pwCheckInput = document.getElementById("pwCheck");
+
+    //    const emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+
+
+    idInput.addEventListener('input', event => {
+        idValueCheck(idInput, "idError");
+    })
+
+    idCheckBtn.addEventListener('click', event => {
+        idDuplicatedCheck();
+    })
+
+    //    emailIDInput.addEventListener('input', event => {
+    //        emailValueCheck();
+    //    })
+
+    //    emailDomainInput.addEventListener('input', event => {
+    //        emailValueCheck();
+    //    })
+
+    //    emailSelectChange.addEventListener('change', event => {
+    //        emailValueCheck();
+    //    })
+
+    pwInput.addEventListener('input', event => {
+        pwValueCheck(pwInput, "pwError");
+    })
+
+    pwCheckInput.addEventListener('input', event => {
+        pw2ValueCheck(pwCheckInput, "pwCheckError");
+    })
+
+    // id, pw verified check
+    function idValueCheck(inputDiv, errorId) {
+        const inputValue = inputDiv.value;
+        const errorBox = document.getElementById(errorId);
+        errorBox.style.color = "rgb(255, 129, 129)"
+        // 아이디 체크
+        if (inputValue.length < 6) {
+            errorBox.innerHTML = "아이디는 최소 6자 이상이어야 합니다.";
+            return "error";
+        } else {
+            errorBox.innerHTML = "";
+        }
+    }
+
+    function pwValueCheck(inputDiv, errorId) {
+        const inputValue = inputDiv.value;
+        const errorBox = document.getElementById(errorId);
+        const errorBox2 = document.getElementById("pwCheckError")
+        errorBox.style.color = "rgb(255, 129, 129)"
+        console.log(inputValue, pwCheckInput.value)
+
+        // 비밀번호 체크
+        if (inputValue.length < 8) {
+            errorBox.innerHTML = "비밀번호는 최소 8자 이상이어야 합니다.";
+            return "error";
+        } else if (inputValue == pwCheckInput.value) {
+            errorBox2.innerHTML = "비밀번호가 일치합니다.";
+            errorBox2.style.color = "rgb(0, 185, 13)";
+        } else {
+            errorBox.innerHTML = "";
+        }
+    }
+
+    function pw2ValueCheck(inputDiv, errorId) {
+        const inputValue = inputDiv.value;
+        const errorBox = document.getElementById(errorId);
+        const errorBox2 = document.getElementById("pwError");
+        errorBox.style.color = "rgb(255, 129, 129)"
+
+        // 비밀번호 일치 체크
+        if (inputValue !== pwInput.value) {
+            errorBox.innerHTML = "비밀번호가 일치하지 않습니다.";
+            return "error";
+        } else if (pwInput.value > 7) {
+            errorBox.innerHTML = "";
+            return "error";
+        } else {
+            errorBox.innerHTML = "비밀번호가 일치합니다.";
+            errorBox2.innerHTML = "";
+            errorBox.style.color = "rgb(0, 185, 13)";
+        }
+    }
+
+    function idDuplicatedCheck() {
+        const id = idInput.value;
+        const errorBox = document.getElementById("idError");
+
+        $.ajax({
+            type: "POST",
+            url: "/sign_up/check_dup",
+            data: {
+                username_give: id
+            },
+            success: function (response) {
+                if (response["exists"]) {
+                    errorBox.style.color = "rgb(255, 129, 129)";
+                    errorBox.innerHTML = "이미 등록된 아이디입니다.";
+                    return "error";
+                } else if (id == undefined) {
+                    errorBox.innerHTML = "아이디는 최소 6자 이상이어야 합니다.";
+                    errorBox.style.color = "rgb(255, 129, 129)";
+                } else {
+                    errorBox.innerHTML = "사용할 수 있는 아이디입니다.";
+                    errorBox.style.color = "rgb(0, 185, 13)";
+                }
+            }
+        });
+    }
+
+    //    function changeEmail() {
+    //        const email = document.getElementById("emailSelect").value;
+    //        document.getElementById("emailDomain").value = email;
+    //    }
+
+    //    function emailValueCheck() {
+    //        const emailID = document.getElementById("emailId").value;
+    //        const emailDom = document.getElementById("emailDomain").value;
+    //        const email = emailID + "@" + emailDom
+    //        const errorBox = document.getElementById("emailError");
+    //        errorBox.style.color = "rgb(255, 129, 129)"
+    //        // 이메일 체크
+    //        if (emailformat.test(email) == false) {
+    //            errorBox.innerHTML = "유효하지 않은 이메일 주소입니다.";
+    //            return "error";
+    //        } else {
+    //            errorBox.innerHTML = "";
+    //        }
+    //    }
+
+    function signUp() {
+        const user_id = $("#id").val();
+        const user_password = $("#pw").val();
+        const idCheckResult = document.getElementById("idError").innerHTML;
+        const pwCheckResult = document.getElementById("pwCheckError").innerHTML;
+        //        const emailCheckResult = document.getElementById("emailError").innerHTML;
+
+        if (idCheckResult !== "사용할 수 있는 아이디입니다.") {
+            alert("아이디 중복확인을 해주세요.");
+        } else if (pwCheckResult !== "비밀번호가 일치합니다.") {
+            alert("비밀번호를 다시 확인해 주세요.");
+            //        } else if (emailCheckResult == "유효하지 않은 이메일 주소입니다.") {
+            //            alert("이메일 주소를 다시 확인해 주세요.")
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/signUp",
+                data: {
+                    id: user_id,
+                    pw: user_password
+                },
+                success: function (response) {
+                    alert("회원가입을 축하드립니다!");
+                    window.location.replace("/login");
+                }
+            });
+        }
+    }
+</script>
+
+</html>

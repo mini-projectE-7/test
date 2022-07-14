@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='')}}"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- menu css file -->
+    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/common.css" />
+    <!-- js -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            randomStation();
+        });
+
+        function randomStation() {
+            $('#card').empty();
+            $.ajax({
+                type: "GET",
+                url: "/random",
+                data: {},
+                success: function (response) {
+                    let rows = response['random_posts']
+                    for (let i = 0; i < rows.length; i++) {
+                        let liquorNAME = rows[i]['liquorNAME']
+                        let manufacturer = rows[i]['manufacturer']
+                        let ingredient = rows[i]['ingredient']
+                        let volume = rows[i]['volume']
+                        let proof = rows[i]['proof']
+                        let feature = rows[i]['feature']
+                        let imageURL = rows[i]['imageURL']
+                        let temp_html = `<div class="col">
+                                            <div class="card h-100">
+                                                <div class="img-container">
+                                                    <div class="img-content">
+                                                        <div class="img-box">
+                                                            <img src="${imageURL}" class="card-img-top">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><b>${liquorNAME}</b></h5>
+                                                    <p class="card-text"><b>제조사</b>: ${manufacturer}</p>
+                                                    <p class="card-ingredient"><b>주원료</b>: ${ingredient}</p>
+                                                    <p class="card-text"><b>규격</b>: ${volume}</p>
+                                                    <p class="card-text"><b>도수</b>: ${proof}</p>
+                                                    <p class="card-feature"><b>특징</b>: ${feature}</p>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        $('#card').append(temp_html);
+                    }
+                }
+            })
+        }
+        new Swiper('.notice-line .swiper', {
+            direction: 'vertical',
+            autoplay: true,
+            loop: true
+        });
+
+        new Swiper('.promotion .swiper', {
+            slidesPerView: 4, // how many slides we wanna show at once
+            spaceBetween: 30, // margin between slides
+            centeredSlides: true, // first slide would be centered
+            loop: true,
+            autoplay: {
+                delay: 5000
+            },
+            pagination: {
+                el: '.promotion .swiper-pagination', //
+                clickable: true //user's page numbering control
+            },
+            navigation: {
+                prevEl: '.promotion .swiper-prev',
+                nextEl: '.promotion .swiper-next'
+            }
+        });
+    </script>
+    <title>리뷰록</title>
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <a href="/">
+                <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
+            </a>
+    </header>
+    <div class="mytitle">
+        <div class="back-color">
+            <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
+        </div>
+        <button id=logbtn onclick="window.location.href='/login'" class="logbtn">로그인</button>
+    </div>
+    <section class="notice">
+        <div class="new">NEW!</div>
+        <div class="notice">
+            <div class="promotion">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="image-slide" src="../static/images/image1.jpg" alt="밤빛머루">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="image-slide" src="../static/images/image2.jpg" alt="까메오막걸리">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="image-slide" src="../static/images/image3.jpg" alt="나루 생 막걸리 11.5도">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="image-slide" src="../static/images/image4.jpg" alt="대대포 막걸리">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-prev">
+                    <div class="material-icons">arrow_back</div>
+                </div>
+                <div class="swiper-next">
+                    <div class="material-icons">arrow_forward</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-5 g-5" id="card">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="img-container">
+                        <div class="img-content">
+                            <div class="img-box">
+                                <img src="" class="card-img-top">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${liquorNAME}</h5>
+                        <p class="card-text">제조사: ${manufacturer}</p>
+                        <p class="card-ingredient">주원료: ${ingredient}</p>
+                        <p class="card-text">규격: ${volume}</p>
+                        <p class="card-text">도수: ${proof}</p>
+                        <p class="card-feature">특징: ${feature}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+</html>

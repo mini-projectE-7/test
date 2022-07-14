@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='')}}"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='profile_pics/profile_placeholder.png') }}"></script>
+  <!-- css -->
+  <link rel="stylesheet" href="../static/common.css" />
+  <title>리뷰작성</title>
+
+  <style>
+    .writing {
+      height: auto;
+      padding: 0 20%;
+      background-image: url("../static/images/banner.jpg");
+    }
+
+    .info-container {
+      display: flex;
+      height: 300px;
+      justify-content: space-around;
+      margin: 30px 0;
+    }
+
+    #liquor-option {
+      height: 30px;
+      margin: 10px;
+    }
+
+    #name {
+      width: 194px;
+      margin-left: 10px;
+    }
+
+    .liq-wrap {
+      display: flex;
+      width: 50%;
+      justify-content: center;
+    }
+
+    .liquor-imagewrap {
+      display: flex;
+      width: 50%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .liquor-image {
+      width: auto;
+      height: 100%;
+    }
+
+    .text-wrap {
+      display: flex;
+      width: 50%;
+      margin: 0 30px;
+    }
+
+    #review {
+      width: 100%;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      show_option();
+    });
+    function show_option() {
+      $.ajax({
+        type: "GET",
+        url: "/post/option",
+        data: {},
+        success: function (response) {
+          let rows = response['liquors']
+          let selected = $("#name option:selected").val()
+          for (let i = 0; i < rows.length; i++) {
+            let liqNames = rows[i]['liquorNAME']
+            let dataObjects = rows[i]
+            let temp_html = `
+            <option id="nameOption" value="${liqNames}">${liqNames}</option>
+            `
+            $('#name').one("click", function () {
+              $('#name').append(temp_html)
+            })
+
+            if (selected === liqNames) {
+              let info = `
+            <div class="info-container">
+            <div class="liq-wrap">
+            <div class="liquor-imagewrap" >
+            <img class="liquor-image"src="${dataObjects.imageURL}" />
+            </div>
+            </div>
+            <div class="text-wrap">
+            <p>
+            이름: ${dataObjects.liquorNAME}<br />
+            제조사: ${dataObjects.manufacturer}<br />
+            주원료: ${dataObjects.ingredient}<br />
+            규격(용량): ${dataObjects.volume}<br />
+            도수: ${dataObjects.proof}<br />
+            제품특징: ${dataObjects.feature}<br />
+            </p>
+            </div>
+            </div>
+            `
+              $('#liquor-info').empty().append(info)
+              $('#name').empty().append(temp_html)
+            }
+          }
+        }
+      });
+    }
+
+    function save_review() {
+      // 만약에 유저가 아니라면 리뷰를 등록할 수 없어야 함!
+      let liquor = $("#name").val()
+      let review = $("#user-review").val()
+      let today = new Date().toISOString()
+
+      $.ajax({
+        type: "POST",
+        url: "/post/review",
+        data: {
+          liquor_give: liquor,
+          review_give: review,
+          date_give: today
+        },
+        success: function (response) {
+          alert(response["msg"])
+          $("modal-post").removeClass("is-active")
+          window.location.reload()
+          // window.location.href(여기에 리뷰리스트 페이지링크를 넣습니다)
+        }
+      });
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <header>
+    <div class="inner">
+      <a href="/">
+        <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
+      </a>
+  </header>
+  <form class="writing">
+    <div id="liquor-option">
+      <label for="selection">술을 선택하세요!</label>
+      <select name="alcohol" id="name" onChange="show_option()">
+        <option value="" disabled selected>선택하세요!</option>
+      </select>
+    </div>
+    <div id="liquor-info">
+    </div>
+    <section class="section" id="review">
+      <article class="media">
+        <figure class="media-left" style="align-self: center">
+          <a class="image is-32x32" href="#">
+            <img class="is-rounded" src="{{url_for('static' , filename='profile_pics/profile_placeholder.png' )}}">
+          </a>
+        </figure>
+        <div class="media-content">
+          <div class="field">
+            <p class="control">
+              <input id="input-post" class="input is-rounded" placeholder="자유롭게 한 줄 리뷰를 작성해보세요!"
+                onclick='$("#modal-post").addClass("is-active")'>
+            </p>
+          </div>
+        </div>
+      </article>
+      <div class="modal" id="modal-post">
+        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+        <div class="modal-content">
+          <div class="box">
+            <article class="media">
+              <div class="media-content">
+                <div class="field">
+                  <p class="control">
+                    <textarea id="user-review" class="textarea" placeholder="자유롭게 한 줄 리뷰를 작성해보세요!"></textarea>
+                  </p>
+                </div>
+                <nav class="level is-mobile">
+                  <div class="level-left">
+
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <a class="button is-sparta" onclick="save_review()">포스팅하기</a>
+                    </div>
+                    <div class="level-item">
+                      <a class="button is-sparta is-outlined" onclick='$("#modal-post").removeClass("is-active")'>취소</a>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"
+          onclick='$("#modal-post").removeClass("is-active")'></button>
+      </div>
+      </div>
+    </section>
+  </form>
+</body>
+
+</html>
