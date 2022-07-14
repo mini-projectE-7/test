@@ -4,7 +4,7 @@ $(document).ready(function () {
 });
 
 function sign_out() {
-    $.removeCookie('mytoken', { path: '/' });
+    $.removeCookie('mytoken', { path: '/home' });
     alert('로그아웃!');
     window.location.href = "/"
 }
@@ -57,7 +57,7 @@ function login_out() {
         url: "/loginout",
         data: {},
         success: function (response) {
-            if (response['result'] == 'success') {
+            if (response['result'] == "success" ) {
                 $('#logbtn').hide()
                 $('#outbtn').show()
             } else {
