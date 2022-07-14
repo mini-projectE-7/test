@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    randomStation();
+});
+
 new Swiper('.notice-line .swiper', {
     direction: 'vertical',
     autoplay: true,
