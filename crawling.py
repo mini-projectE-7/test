@@ -1,4 +1,5 @@
 import certifi
+from click import get_text_stream
 from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup

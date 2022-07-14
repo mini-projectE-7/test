@@ -23,10 +23,21 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
+    <!-- menu css file -->
+    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/common.css" />
+  
 
 
     <style>
+
+        * {
+        font-family: 'Gowun Dodum', sans-serif;
+        }
+        .logo {
+        height: 50px;
+        margin-bottom: -20px;
+        }
         .table {
             width: 80%;
             max-width: 1500px;
@@ -52,7 +63,7 @@
 
 
         .wrap {
-            background-color: burlywood;
+            background-color: white;
             min-height: 100vh;
             padding-bottom: 50px;
         }
@@ -95,11 +106,9 @@
 
 
                         let temp_html = `<tr>
-
                                         <td class="idr">${name}</td>
                                         <td>${lname}</td>
                                         <td>${comment}</td>
-
                                         </tr>`
 
                         console.log(temp_html)
@@ -117,8 +126,19 @@
 <body>
 
     <div class="wrap">
-        <div class="banner"></div>
-        <hr>
+        <header>
+            <div class="inner">
+                <a href="/">
+                    <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
+                </a>
+            </div>
+        </header>
+        <div class="mytitle">
+            <div class="back-color">
+                <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
+            </div>
+        
+        </div>
         <table class="table">
             <thead class="thead-light">
                 <tr>
