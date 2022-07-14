@@ -14,6 +14,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 
+    <!-- menu css file -->
+    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/common.css" />
+
     <style>
         .box {
             width: 500px;
@@ -71,6 +75,20 @@
 </head>
 
 <body>
+    <header>
+        <div class="inner">
+            <a href="/">
+                <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
+            </a>
+        </div>
+    </header>
+    <div class="mytitle">
+        <div class="back-color">
+            <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
+        </div>
+    
+    </div>
+    
     <form class="box">
         <div class="field">
             <label class="label">ID</label>
@@ -90,10 +108,6 @@
             <button type="button" class="button is-primary" onclick="sign_in()">로그인</button>
             {# <a class="button is-primary" onclick="sign_in()">로그인</a>#}
             <a class="button is-primary" onclick="window.location.href='/join'">회원가입</a>
-            <label class="checkbox">
-                <input type="checkbox">
-                로그인유지
-            </label>
         </div>
     </form>
 </body>

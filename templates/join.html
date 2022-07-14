@@ -14,10 +14,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+    <!-- menu css file -->
+    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/common.css" />
+
     <style>
         .container {
-            width: auto;
-            max-width: 768px;
+            background-color: white;
+            width: 600px;
+            height: 400px;
+
+            position: absolute;
+            margin: -150px 0px 0px -200px;
+            top: 40%;
+            left: 50%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            border-radius: 10px;
+            border-style: solid;
+            border-width: thin;
+            box-shadow: 1px 1px 1px 1px grey;
+            
+            border-color: white;
         }
 
         .content {
@@ -47,15 +68,36 @@
 </head>
 
 <body>
+    <header>
+        <div class="inner">
+            <a href="/">
+                <img class="logo" src="../static/images/logo.jpeg" alt="우리술" />
+            </a>
+        </div>
+    </header>
+    <div class="mytitle">
+        <div class="back-color">
+            <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
+        </div>
+    
+    </div>
 
     <div id="container" class="container">
         <div id="content" class="content">
-            <div class="join_content">
+            <div class="field">
+                <label class="label">ID</label>
+                <div class="control">
+                    <input type="text" id="id" class="input" type="id" placeholder="아이디 입력 (6-20자)">
+                    <button type="button" id="idCheck" class="button is-primary">중복 확인</button>
+                </div>
+            </div>
+            
+            <!-- <div class="join_content">
                 <div class="form">
                     아이디
                     <input type="text" id="id" placeholder="아이디 입력 (6-20자)" maxlength="20">
                     <button type="button" id="idCheck" class="button is-primary">중복 확인</button>
-                </div>
+                </div> -->
                 <div class="form__errorbox" id="idError"></div>
                 <!-- <div class="form">
                     이메일
@@ -69,7 +111,20 @@
                         <option value="kakao.com">kakao.com</option>
                     </select>
                 </div> -->
-                <div class="form__errorbox" id="emailError"></div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input id="pw" class="input" type="password" placeholder="비밀번호 입력 (8-20자)">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password 확인</label>
+                    <div class="control">
+                        <input id="pwCheck" class="input" type="password" placeholder="비밀번호 재입력">
+                    </div>
+                </div>
+        
+                <!-- <div class="form__errorbox" id="emailError"></div>
                 <div class="form">
                     비밀번호
                     <input type="password" id="pw" placeholder="비밀번호 입력 (8-20자)" maxlength="20">
@@ -78,7 +133,7 @@
                 <div class="form">
                     비밀번호 확인
                     <input type="password" id="pwCheck" placeholder="비밀번호 재입력" maxlength="20">
-                </div>
+                </div> -->
                 <div class="form__errorbox" id="pwCheckError"></div>
                 <button class="button is-primary" id="signUp" onclick="signUp()">회원가입</button>
                 <button class="button is-primary" onclick="window.location.href='/'">취소</button>
