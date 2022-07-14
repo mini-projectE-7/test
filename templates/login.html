@@ -8,7 +8,10 @@
     <title>로그인페이지</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -16,16 +19,24 @@
 
     <!-- menu css file -->
     <link rel="stylesheet" href="../static/main.css" />
-    <link rel="stylesheet" href="../static/common.css" />
 
     <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .logo {
+            height: 50px;
+            margin: 0;
+        }
+
         .box {
             width: 500px;
             height: 400px;
 
             position: absolute;
             margin: -150px 0px 0px -200px;
-            top: 40%;
+            top: 50%;
             left: 50%;
 
             display: flex;
@@ -33,7 +44,6 @@
             justify-content: center;
         }
     </style>
-
 
     <script>
         //      {% if msg %}
@@ -86,9 +96,8 @@
         <div class="back-color">
             <p class="hello">우리 술을 공유하고, <br /> 사람들과 자유롭게 의견을 나눠보세요!</p>
         </div>
-    
     </div>
-    
+
     <form class="box">
         <div class="field">
             <label class="label">ID</label>
@@ -105,9 +114,9 @@
         </div>
 
         <div class="btn">
-            <button type="button" class="button is-primary" onclick="sign_in()">로그인</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="sign_in()">로그인</button>
             {# <a class="button is-primary" onclick="sign_in()">로그인</a>#}
-            <a class="button is-primary" onclick="window.location.href='/join'">회원가입</a>
+            <a class="btn btn-outline-secondary" onclick="window.location.href='/join'">회원가입</a>
         </div>
     </form>
 </body>
